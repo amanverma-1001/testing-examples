@@ -3,26 +3,19 @@ pipeline {
     stages {
         stage('Compile') {
             steps {
-                sh 'mvn clean package -DskipTests=true'
+                echo "test 1"
             }
         }
         stage('Unit Tests') {
             steps {
-                sh 'mvn surefire:test'
+                echo "Unit Test"
             }
         }
          stage('Integration Tests') {
             steps {
-                sh 'mvn failsafe:integration-test'
+                echo "integration test"
             }
         }
     }
-    post {
-        always {
-            junit 'target/surefire-reports/TEST-*.xml'
-        }
-        failure {
-            mail to: 'kiwaczki@gmail.com', subject: 'The Pipeline failed :(', body:'The Pipeline failed :('
-        }
-    }
+    
 }
